@@ -1,7 +1,9 @@
-package com.example.kuldip.allinonemart;
+package com.example.kuldip.allinonemart.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.kuldip.allinonemart.R;
 
 public class MainActivity extends AppCompatActivity {
 
