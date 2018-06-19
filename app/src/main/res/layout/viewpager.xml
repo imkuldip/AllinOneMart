@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:background="#abc"-->
+        <!--android:id="@+id/viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"/>-->
+
+
+        <!--&gt;</android.support.v4.view.ViewPager>-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:id="@+id/v_flipper"
+        android:layout_centerInParent="true"
+        android:layout_height="200dp"></ViewFlipper>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/first_floor"
+            android:text="First Floor"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/second_floor"
+            android:text="Second Floor"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/third_floor"
+            android:text="Third Floor"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/front_view"
+            android:text="Front View"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -10,9 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.design.widget.CoordinatorLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.kuldip.allinonemart.Fragments.HomeFragment;
 import com.example.kuldip.allinonemart.R;
 
 public class NavDrawerActivity extends AppCompatActivity
@@ -42,7 +44,10 @@ public class NavDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,new HomeFragment()).commit();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -54,12 +59,12 @@ public class NavDrawerActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.nav_drawer, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.nav_drawer, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -85,6 +90,20 @@ public class NavDrawerActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+//            getSupportFragmentManager().beginTransaction().remove(new HomeTopFragment()).commit();
+//            getSupportFragmentManager().beginTransaction().remove(new HomeBottomFragment()).commit();
+//            if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+//                for (int i = 0; i < getSupportFragmentManager().getFragments().size(); i++) {
+//                    Fragment mFragment = getSupportFragmentManager().getFragments().get(i);
+//                    if (mFragment != null) {
+//                        getSupportFragmentManager().beginTransaction().remove(mFragment).commit();
+//                    }
+//                }
+//            }
+//            getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer,new HomeFragment()).commit();
+
+
+
 
         } else if (id == R.id.nav_slideshow) {
 
