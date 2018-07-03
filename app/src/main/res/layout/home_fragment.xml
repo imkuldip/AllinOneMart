@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:id="@+id/image_view"/>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="10dp">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/homeProgressBar"
+            />
+    <AdapterViewFlipper
+        android:id="@+id/homeAdapterViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </AdapterViewFlipper>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/internetconnection"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="-20dp"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/categoryRecycler"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="10dp">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/adProgressBar"
+            />
+        <AdapterViewFlipper
+            android:id="@+id/adAdapterViewFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </AdapterViewFlipper>
+    </android.support.v7.widget.CardView>
 </LinearLayout>
+

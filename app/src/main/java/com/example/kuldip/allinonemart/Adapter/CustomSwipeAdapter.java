@@ -13,7 +13,7 @@ import com.example.kuldip.allinonemart.R;
 
 public class CustomSwipeAdapter extends PagerAdapter {
     Context context;
-    private int [] image_resources = {R.mipmap.four, R.mipmap.one,R.mipmap.three,R.mipmap.two};
+    private int [] image_resources = {R.mipmap.ic_launcher};
     private LayoutInflater layoutInflater;
 
     public CustomSwipeAdapter(Context context) {
@@ -34,14 +34,14 @@ public class CustomSwipeAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View itemView = layoutInflater.inflate(R.layout.home_fragment,container,false);
+        View itemView = layoutInflater.inflate(R.layout.home_fragment_imageview,container,false);
         ImageView imageView = (ImageView)itemView.findViewById(R.id.image_view);
         imageView.setImageResource(image_resources[position]);
 
         container.addView(itemView);
         return itemView;
     }
-
+//
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 

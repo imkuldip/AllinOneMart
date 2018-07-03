@@ -1,35 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.UserDetailActivity"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Name"
-    android:id="@+id/uName"/>
 
-    <EditText
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:id="@+id/uAddress"/>
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:elevation="3dp"
+        app:cardCornerRadius="10dp"
+        >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone"
-        android:id="@+id/uPhone"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:layout_margin="3dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="submit"
-        android:id="@+id/submitDetail"/>
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:src="@drawable/add_user" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Your Detail"
+                    android:textColor="#fff"
+                    android:textSize="21sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/linearlayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-10dp"
+                android:rotation="45"
+                android:src="@drawable/square" />
+
+
+            <RelativeLayout
+
+                android:id="@+id/phone1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/image_ad"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blue"
+                    android:padding="8dp"
+                    android:src="@drawable/user_name"
+                    android:tint="#fff" />
+
+                <EditText
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uName"
+                    android:layout_alignBottom="@+id/image_ad"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/image_ad"
+                    android:background="#dedcdc"
+                    android:hint="Name"
+                    android:paddingLeft="20dp"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:id="@+id/email1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phone1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/image_a"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blue"
+                    android:padding="8dp"
+                    android:src="@drawable/user_address"
+                    android:tint="#fff" />
+
+                <EditText
+                    android:id="@+id/uAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/image_a"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/image_a"
+                    android:background="#dedcdc"
+                    android:hint="Address"
+                    android:paddingLeft="20dp"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:id="@+id/price1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/image_"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blue"
+                    android:padding="8dp"
+                    android:src="@drawable/user_phone"
+                    android:tint="#fff" />
+
+                <EditText
+                    android:id="@+id/uPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/image_"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/image_"
+                    android:background="#dedcdc"
+                    android:hint="Mobile Number"
+                    android:paddingLeft="20dp"
+                    android:inputType="number"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+
+                android:id="@+id/description1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/price1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/imag"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blue"
+                    android:padding="8dp"
+                    android:src="@drawable/user_purpose"
+                    android:tint="#fff" />
+
+                <EditText
+                    android:id="@+id/purpose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imag"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/imag"
+                    android:background="#dedcdc"
+                    android:hint="Purpose"
+                    android:paddingLeft="20dp"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description1">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="submit"
+                    android:background="@drawable/button_style"
+                    style="@style/btn"
+                    android:id="@+id/submitDetail"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>

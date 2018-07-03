@@ -1,19 +1,17 @@
 package com.example.kuldip.allinonemart.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.kuldip.allinonemart.Activities.ViewDetailActivity;
-import com.example.kuldip.allinonemart.Activities.ViewPasalActivity;
 import com.example.kuldip.allinonemart.DataModel.NumberOfView;
 import com.example.kuldip.allinonemart.R;
 
@@ -29,7 +27,6 @@ public class ViewPasalAdapter extends RecyclerView.Adapter<ViewPasalAdapter.View
         this.context = context;
         this.list = list;
     }
-
 
     @NonNull
     @Override
@@ -50,27 +47,42 @@ public class ViewPasalAdapter extends RecyclerView.Adapter<ViewPasalAdapter.View
          final String phone = list.get(position).getPhone();
          final String email= list.get(position).getEmail();
 
-         holder.btn.setText(status);
-//         if (list.get(position).getStatus().equals("BOOKED"))
-//         {
-//             holder.btn.setBackgroundColor(Color.parseColor("#FFFF000D"));
+        // holder.btn.setText(status);
+
+         if(status.equals("1"))
+         {
+             holder.btn.setBackgroundResource(R.drawable.home_green);
+             //holder.btn.setBackgroundColor(Color.parseColor("#4fea76"));;
+         }else if (status.equals("2")){
+//             holder.btn.setBackgroundColor(Color.parseColor("#f50408"));;
+             holder.btn.setBackgroundResource(R.drawable.if_home_red);
+
+
+         }
+         else if (status.equals("3")){
+//             holder.btn.setBackgroundColor(Color.parseColor("#fff200"));;
+             holder.btn.setBackgroundResource(R.drawable.if_home_yellow);
+         }
+
+//         if((!status.equals("Booked"))) {
+
+             holder.btn.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     Intent intent = new Intent(context, ViewDetailActivity.class);
+                     intent.putExtra("pasalName", pasalName);
+                     intent.putExtra("categoryId", categoryId);
+                     intent.putExtra("status", status);
+                     intent.putExtra("description", description);
+                     intent.putExtra("price", price);
+                     intent.putExtra("phone", phone);
+                     intent.putExtra("email", email);
+                     context.startActivity(intent);
+//                     ((Activity)context).finish();
+
+                 }
+             });
 //         }
-
-        holder.btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ViewDetailActivity.class);
-                intent.putExtra("pasalName", pasalName);
-                intent.putExtra("categoryId",categoryId);
-                intent.putExtra("status", status);
-                intent.putExtra("description", description);
-                intent.putExtra("price", price);
-                intent.putExtra("phone", phone);
-                intent.putExtra("email", email);
-                context.startActivity(intent);
-
-            }
-        });
 
     }
 
@@ -80,7 +92,7 @@ public class ViewPasalAdapter extends RecyclerView.Adapter<ViewPasalAdapter.View
     }
 
     public class ViewPasalHolder extends RecyclerView.ViewHolder{
-        Button btn;
+        ImageButton btn;
 
         public ViewPasalHolder(View itemView) {
             super(itemView);

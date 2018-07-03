@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--app:cardCornerRadius="15dp"-->
+            <!--app:contentPadding="15dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <!--style="@style/text_view1"-->
+
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:text="Baneshwor, Kathmandu"
+                android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                android:layout_width="match_parent"
+                android:drawablePadding="5dp"
+                android:layout_height="wrap_content" />
+
+            <!--style="@style/text_view1"-->
+
+
+            <TextView
+                android:textColor="#100856"
+                android:id="@+id/contact_email"
+                android:padding="10dp"
+                android:drawableLeft="@drawable/ic_sms_black_24dp"
+                android:drawablePadding="8dp"
+                android:text="ccinepal.com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <!--style="@style/text_view1"-->
+
+            <TextView
+                android:textColor="#100856"
+                android:id="@+id/contact_call"
+                android:clickable="true"
+                android:drawableLeft="@drawable/ic_call_black_24dp"
+                android:drawablePadding="5dp"
+                android:text="+977 014256677"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                />
+            <!--style="@style/text_view1"-->
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/contact_btn"
+                android:text="Dismiss"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

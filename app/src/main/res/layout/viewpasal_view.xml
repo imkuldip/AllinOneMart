@@ -5,7 +5,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <Button
+    <ImageButton
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="2dp"
         android:id="@+id/btn"
         android:layout_width="70dp"
         android:layout_height="70dp" />

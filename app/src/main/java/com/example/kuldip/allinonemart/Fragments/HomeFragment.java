@@ -1,140 +1,141 @@
 package com.example.kuldip.allinonemart.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.AdapterViewFlipper;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.example.kuldip.allinonemart.Activities.ViewPasalActivity;
+import com.example.kuldip.allinonemart.Adapter.AdFlipperAdapter;
 import com.example.kuldip.allinonemart.Adapter.CustomSwipeAdapter;
+import com.example.kuldip.allinonemart.Adapter.HomeFlipperAdapter;
+import com.example.kuldip.allinonemart.Adapter.ViewCategoryAdapter;
+import com.example.kuldip.allinonemart.DataManager.ApiClient;
+import com.example.kuldip.allinonemart.DataManager.ApiInterface;
+import com.example.kuldip.allinonemart.DataModel.AdImageList;
+import com.example.kuldip.allinonemart.DataModel.AdImageUrl;
+import com.example.kuldip.allinonemart.DataModel.ConnectionDetector;
+import com.example.kuldip.allinonemart.DataModel.GetCategory;
+import com.example.kuldip.allinonemart.DataModel.HomeImageList;
+import com.example.kuldip.allinonemart.DataModel.HomeImageUrl;
 import com.example.kuldip.allinonemart.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     Context context;
     ViewFlipper viewFlipper;
-    ViewPager viewPager;
-    Button first,second,third,front;
-    int fst,scnd,thrd,frnt;
+    LinearLayoutManager linearLayoutManager;
     CustomSwipeAdapter customSwipeAdapter;
+    RecyclerView recyclerView;
+    private ApiInterface apiInterface;
+    ConnectionDetector cd;
+    AdapterViewFlipper homeAdapterViewFlipper,adAdapterViewFlipper;
+    TextView ic;
+    ProgressBar homeProgressBar,adProgressBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         context = container.getContext();
-        View view = inflater.inflate(R.layout.viewpager,null);
+        View view = inflater.inflate(R.layout.home_fragment,null);
 
-        first = view.findViewById(R.id.first_floor);
-        second = view.findViewById(R.id.second_floor);
-        third = view.findViewById(R.id.third_floor);
-        front = view.findViewById(R.id.front_view);
+        recyclerView = view.findViewById(R.id.categoryRecycler);
+        linearLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        viewFlipper = view.findViewById(R.id.v_flipper);
-//        viewPager = view.findViewById(R.id.viewpager);
-        int images[] = {R.mipmap.one,R.mipmap.two,R.mipmap.three,R.mipmap.four};
+        cd = new ConnectionDetector(context);
+        ic = view.findViewById(R.id.internetconnection);
+        homeProgressBar = view.findViewById(R.id.homeProgressBar);
+        adProgressBar = view.findViewById(R.id.adProgressBar);
+        homeProgressBar.setVisibility(View.VISIBLE);
+        adProgressBar.setVisibility(View.VISIBLE);
 
+        homeAdapterViewFlipper = view.findViewById(R.id.homeAdapterViewFlipper);
+        adAdapterViewFlipper = view.findViewById(R.id.adAdapterViewFlipper);
 
-        for (int i = 0; i<images.length;i++)
-            flipperImages(images[i]);
+        apiInterface =  ApiClient.getClient().create(ApiInterface.class);
 
-//        for (int image : images)
-//        {
-//            flipperImages(image);
-//        }
+        if (cd.isConnected()) {
+            Call<HomeImageList> homeimg = apiInterface.getHomeImageList();
+            homeimg.enqueue(new Callback<HomeImageList>() {
+                @Override
+                public void onResponse(Call<HomeImageList> homeimg, Response<HomeImageList> response) {
+                    homeProgressBar.setVisibility(View.GONE);
+                    //getting list of heroes
+                    ArrayList<HomeImageUrl> homeImages = response.body().getHomeImageList();
+                    //creating adapter object
+                    HomeFlipperAdapter homeadapter = new HomeFlipperAdapter(context, homeImages);
 
-//        viewPager = view.findViewById(R.id.viewpager);
-//        customSwipeAdapter = new CustomSwipeAdapter(context);
-//        viewPager.setAdapter(customSwipeAdapter);
-//        new Timer().scheduleAtFixedRate(new MyTimerTask(),2000,4000);
+                    //adding it to adapterview flipper
+                    homeAdapterViewFlipper.setAdapter(homeadapter);
+                    homeAdapterViewFlipper.setFlipInterval(5000);
+                    homeAdapterViewFlipper.startFlipping();
+                }
+                @Override
+                public void onFailure(Call<HomeImageList> homeimg, Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
 
-        first.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fst=1;
-                sendId(fst);
-            }
-        });
-        second.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scnd=2;
-                sendId(scnd);
-            }
-        });
-        third.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                thrd=3;
-                sendId(thrd);
-            }
-        });
-        front.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                frnt=4;
-                sendId(frnt);
-            }
-        });
+            Call<AdImageList> adimg = apiInterface.getAdImageList();
+            adimg.enqueue(new Callback<AdImageList>() {
+                @Override
+                public void onResponse(Call<AdImageList> adimg, Response<AdImageList> response) {
+                    adProgressBar.setVisibility(View.GONE);
+                    //getting list of heroes
+                    ArrayList<AdImageUrl> adImages = response.body().getAdImageList();
+                    //creating adapter object
+                    AdFlipperAdapter adadapter = new AdFlipperAdapter(context, adImages);
+                    //adding it to adapterview flipper
+                    adAdapterViewFlipper.setAdapter(adadapter);
+                    adAdapterViewFlipper.setFlipInterval(3000);
+                    adAdapterViewFlipper.startFlipping();
+                }
+                @Override
+                public void onFailure(Call<AdImageList> adimg, Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
 
+            Call<List<GetCategory>> call = apiInterface.getCategory();
+            call.enqueue(new Callback<List<GetCategory>>() {
+                @Override
+                public void onResponse(Call<List<GetCategory>> call, Response<List<GetCategory>> response) {
+                    List<GetCategory> categoryList = response.body();
+                    ViewCategoryAdapter viewCategoryAdapter = new ViewCategoryAdapter(context,categoryList );
+                    recyclerView.setAdapter(viewCategoryAdapter);
+                }
+                @Override
+                public void onFailure(Call<List<GetCategory>> call, Throwable t) {
+                    Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            ic.setText("No Internet Connection!!");
+        }
 
         return view;
+
     }
 
-    public void flipperImages (int image){
-        ImageView imageView = new ImageView(context);
-        imageView.setBackgroundResource(image);
 
-        viewFlipper.addView(imageView);
-        viewFlipper.setFlipInterval(5000);
-        viewFlipper.setAutoStart(true);
-
-        viewFlipper.setInAnimation(context,android.R.anim.slide_in_left);
-        viewFlipper.setOutAnimation(context,android.R.anim.slide_out_right);
-        viewFlipper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewFlipper.showNext();
-            }
-        });
-    }
-
-//    public class MyTimerTask extends TimerTask{
-//        @Override
-//        public void run() {
-//            getActivity().runOnUiThread(new Runnable(){
-//
-//                @Override
-//                public void run() {
-//                    if(viewPager.getCurrentItem()==0)
-//                        viewPager.setCurrentItem(1);
-//                    else if(viewPager.getCurrentItem()==1)
-//                        viewPager.setCurrentItem(2);
-//                    else if(viewPager.getCurrentItem()==2)
-//                        viewPager.setCurrentItem(3);
-//                    else
-//                        viewPager.setCurrentItem(0);
-//
-//                }
-//
-//            });
-//        }
-//    }
-
-    public void sendId(int id){
-        int categoryId = id;
-
-        Intent intent=new Intent(context, ViewPasalActivity.class);
-        intent.putExtra("category_id", categoryId);
-        startActivity(intent);
-        }
 }
 
 
